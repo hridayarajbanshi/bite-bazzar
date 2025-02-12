@@ -9,8 +9,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        lightGreen: "#042A2B",
+        moonStone: "#F25F5C",
       },
     },
   },
