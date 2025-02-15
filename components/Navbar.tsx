@@ -20,6 +20,7 @@ import {
 
 import { useRouter } from "next/navigation";
 const Navbar = () => {
+  const cartItems = true;
   const router = useRouter();
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,15 +71,27 @@ const openCart = () => {
               </span>
             </button>
             <Card className="w-96 bg-white shadow-lg rounded-sm top-20 z-10 absolute right-10" hidden={!isCartOpen}>
-  <CardHeader className="bg-gray-200">
-    <CardTitle>Product Title</CardTitle>  
-    <CardDescription>Card Description</CardDescription>
+  <CardHeader className="bg-gray-200 p-4 text-lg text-center ">
+    <CardTitle>Shopping Cart</CardTitle>  
   </CardHeader>
-  <CardContent>
+  {cartItems ? (<CardContent>
+    <div className="flex gap-4 p-4">
+      <img src="https://th.bing.com/th/id/OIP.Cu7qo2FrfQru26vGArqSnwHaG1?w=618&h=571&rs=1&pid=ImgDetMain" className="w-24"></img>
+    <div className="flex flex-col gap-2">
+    <h2 className="my-2 font-semibold text-lime-700">Product Title</h2>
     <p>Card Content</p>
-  </CardContent>
+    <p> Product price</p> {/* Price */}
+    </div>
+    </div>
+  </CardContent>): (
+    <CardDescription>
+      <p className="p-4 text-lg text-center font-semibold ">Your cart is empty : (</p>
+    </CardDescription>
+  )}
   <CardFooter>
-    <p>Card Footer</p>
+   {cartItems? (<button className="bg-lime-700 text-white p-2 rounded-sm w-full">Checkout</button>): (
+      <button className="bg-lime-700 text-white p-2 rounded-sm w-full">Shop our products</button>
+   )}
   </CardFooter>
 </Card>
             {/* Profile Button */}
