@@ -4,7 +4,7 @@ const Footer = () => {
     const year = new Date().getFullYear();
   return (
     <footer className="bg-lightGreen shadow-md">
-  <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+  <div className="mx-auto space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
     <div className="sm:flex sm:items-center sm:justify-between">
       <div className="text-white">
       <span className='text-3xl  font-bold'> BITE BAZZAR</span> 
@@ -17,7 +17,7 @@ const Footer = () => {
             href="#"
             rel="noreferrer"
             target="_blank"
-            className=" transition hover:opacity-75"
+            className=" transition hover:opacity-75 text-gray-200"
           >
             <span className="sr-only">Facebook</span>
 
@@ -36,7 +36,7 @@ const Footer = () => {
             href="#"
             rel="noreferrer"
             target="_blank"
-            className=" transition hover:opacity-75"
+            className=" transition hover:opacity-75 text-gray-200"
           >
             <span className="sr-only">Instagram</span>
 
@@ -55,7 +55,7 @@ const Footer = () => {
             href="#"
             rel="noreferrer"
             target="_blank"
-            className=" transition hover:opacity-75"
+            className=" transition hover:opacity-75 text-gray-200"
           >
             <span className="sr-only">Twitter</span>
 
@@ -72,7 +72,7 @@ const Footer = () => {
             href="#"
             rel="noreferrer"
             target="_blank"
-            className=" transition hover:opacity-75"
+            className=" transition hover:opacity-75 text-gray-200"
           >
             <span className="sr-only">GitHub</span>
 
@@ -89,7 +89,7 @@ const Footer = () => {
     </div>
 
     <div
-      className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16"
+      className="grid grid-cols-1 gap-8 border-t text-gray-200 border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16"
     >
       <div>
         <p className="font-semibold ">Services</p>

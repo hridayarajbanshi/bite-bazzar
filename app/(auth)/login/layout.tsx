@@ -1,9 +1,6 @@
+import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import {
-  ClerkProvider,
-} from '@clerk/nextjs'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bite Bazzar - The Best Snacks in Town",
+  title: "Login",
   description: "Bite Bazzar is the best place to find snacks in town.",
 };
 
@@ -26,14 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+    <Footer/>
       </body>
     </html>
-    </ClerkProvider>
   );
 }
