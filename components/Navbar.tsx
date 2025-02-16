@@ -76,11 +76,12 @@ const openCart = () => {
   </CardHeader>
   {cartItems ? (<CardContent>
     <div className="flex gap-4 p-4">
-      <img src="https://th.bing.com/th/id/OIP.Cu7qo2FrfQru26vGArqSnwHaG1?w=618&h=571&rs=1&pid=ImgDetMain" className="w-24"></img>
+      <img src="https://th.bing.com/th/id/OIP.Cu7qo2FrfQru26vGArqSnwHaG1?w=618&h=571&rs=1&pid=ImgDetMain" className="w-28"></img>
     <div className="flex flex-col gap-2">
     <h2 className="my-2 font-semibold text-lime-700">Product Title</h2>
     <p>Card Content</p>
     <p> Product price</p> {/* Price */}
+    <p> Is Available</p>
     </div>
     </div>
   </CardContent>): (

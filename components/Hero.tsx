@@ -10,7 +10,7 @@ import {
 
 const Hero = () => {
   return (
-    <div className="bg-gray-100 h-auto  mx-auto flex justify-center items-center">
+    <div className="bg-gray-100 h-auto  mx-auto flex flex-col justify-center items-center">
       <div className="relative w-full  overflow-hidden">
         <Carousel>
           <CarouselContent className="flex">
@@ -72,7 +72,10 @@ const Hero = () => {
   </dl>
 </div>
       </div>
+      
     </div>
+    
+    
   );
 };
 
