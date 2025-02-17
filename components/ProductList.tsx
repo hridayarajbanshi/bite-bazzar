@@ -12,8 +12,8 @@ const ProductList = () => {
     <div className='w-full mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8'>
       <Carousel className="w-full">
         <CarouselContent className="-ml-1 flex">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/4">
               <div className="p-1">
                 <a href="#" className="group relative block overflow-hidden">
                   <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
@@ -64,6 +64,7 @@ const ProductList = () => {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+
     </div>
   );
 };
