@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Tabs from "@/components/Tabs";
 import Hero from "@/components/Hero";
 import ProductList from "@/components/ProductList";
+import CatogoryList from "@/components/CatogoryList";
 // import { Carousel } from "@/components/ui/carousel";
 export default function Home() {
   return (
@@ -11,7 +12,10 @@ export default function Home() {
       <Navbar/>
       <Tabs/>
       <Hero/>
-      <div className=" mx-auto  px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <div className=" mx-auto  px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+      <h2 className="text-2xl font-semibold text-gray-900  mb-8">Popular Categories</h2>
+      <CatogoryList/>
+
         <h2 className="text-2xl font-semibold text-gray-900  mb-8">Best Selling</h2>
      
       <ProductList/>
