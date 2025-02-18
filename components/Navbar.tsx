@@ -28,7 +28,7 @@ const Navbar = () => {
     const formData = new FormData(e.currentTarget);
     const search = formData.get("name") as string;
    if(search){
-      router.push(`/product?name=${search}`);
+      router.push(`/products/${search}`);
    }   
   }
   const [isProfileOpen, setIsProfileOpen] = useState(false);
