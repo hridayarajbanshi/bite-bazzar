@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 const Page = () => {
   const imgs = ["momos-snacks-street-foods-nepal.jpg", "nepal-sel-roti-street-foods.jpg", "snacks-street-foods-pakora-nepal.jpg","street-foods-snacks-nepal-shapale.jpg","samosa-snacks-street-foods-nepal.jpg" , "aloo-chop-street-foods-nepal.jpg"  
   ];
-  const names = ["Momo", "SelRoti", "Pakora", "Shapale", "Samosa", "Aloo Chop"];
+  const names = ["Momo", "Selroti", "Pakora", "Shapale", "Samosa", "Aloo Chop"];
   return (
     <>
       <Navbar />
