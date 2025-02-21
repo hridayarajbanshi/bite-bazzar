@@ -17,7 +17,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 const Navbar = () => {
   const cartItems = true;
@@ -42,7 +42,9 @@ const openCart = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-4">
+            <Link href="/">
             <span className="text-3xl font-bold text-white">BITE BAZZAR</span>
+            </Link>
           </div>
 
           {/* Search Bar */}
