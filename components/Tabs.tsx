@@ -24,7 +24,7 @@ const Tabs = () => {
     <div className="border-b flex bg-white items-center justify-center border-gray-200">
       <nav className="-mb-px  mt-2  flex gap-6 " aria-label="Tabs">
         <Link
-          href="/"
+          href="/products/"
           className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-700 hover:border-gray-300 hover:text-moonStone text-lg"
         >
         Baked Goods
