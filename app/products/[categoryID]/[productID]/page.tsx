@@ -1,8 +1,12 @@
 import React from 'react'
-
+import Navbar from '@/components/Navbar'
+import Tabs from '@/components/Tabs'
+import Footer from '@/components/Footer'
 const page = () => {
   return (
     <>
+      <Navbar />
+      <Tabs />
     <section>
   <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
     <header className="text-center">
@@ -105,6 +109,7 @@ const page = () => {
     </ul>
   </div>
 </section>
+      <Footer />
     </>
   )
 }

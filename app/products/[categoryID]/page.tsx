@@ -4,13 +4,17 @@ import Tabs from '@/components/Tabs'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
 import { ProductCard } from '@/components/ProductCard'
-const page = ({params, }: {
-    params: {slug: string[]}
-}) => {
-  const products = Array.from({length: 10}, (_, index) =>({
+const page = ({ params }: { params: { categoryID: string; productID: string } }) => {
+  const products = Array.from({ length: 10 }, (_, index) => ({
     id: index,
-    tags: `${params.slug}`,
-  }))
+    categoryID: params.categoryID,
+    productID: `${index}`,
+    tag: params.categoryID,
+    name: `Sample Product ${index}`,
+    price: 120 + index * 10, // Example pricing
+    image: 'https://th.bing.com/th/id/OIP.aG7qW3hdlk6cb1qmIuyNtgHaE9?rs=1&pid=ImgDetMain',
+  }));
+  
   return ( 
   <>
       <Navbar />
@@ -74,8 +78,8 @@ const page = ({params, }: {
             </svg>
           </li>
           <li>
-            <Link href={`/products/${params.slug}`} className="block transition hover:text-gray-700">
-              {params.slug}
+            <Link href={`/products/${params.categoryID}`} className="block transition hover:text-gray-700">
+              {params.categoryID}
             </Link>
           </li>
         </ol>
@@ -218,16 +222,21 @@ const page = ({params, }: {
 
 
       <div className="lg:col-span-3">
-      <h2 className="text-xl font-bold text-gray-900 sm:text-3xl my-4">{params.slug}</h2>
+      <h2 className="text-xl font-bold text-gray-900 sm:text-3xl my-4">{params.categoryID}</h2>
       
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {
-            products.map((product) =>(
+        {products.map((product) => (
               <li key={product.id}>
-                <ProductCard product={product} tag={product.tags}/>
+                <ProductCard 
+                  categoryID={product.categoryID}
+                  productID={product.productID}
+                  tag={product.tag}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                />
               </li>
-            ))
-          }
+            ))}
         </ul>
        
       </div>
