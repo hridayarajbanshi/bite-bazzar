@@ -1,112 +1,129 @@
+"use client"
+
 import React from 'react'
+import {useParams} from "next/navigation";
 import Navbar from '@/components/Navbar'
 import Tabs from '@/components/Tabs'
 import Footer from '@/components/Footer'
+import Link from 'next/link'
+import { loadStripe } from '@stripe/stripe-js';
+import ProductImg from '@/components/ProductImg';
 const page = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const params = useParams();
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+  const handleCheckout = async () => {
+    const stripe = await stripePromise;
+    const response = await fetch('/api/checkout', { method: 'POST' });
+    const session = await response.json();
+    if (stripe) {
+      stripe.redirectToCheckout({ sessionId: session.id });
+    }
+  };
   return (
     <>
       <Navbar />
       <Tabs />
     <section>
-  <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-    <header className="text-center">
-      <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">Product Collection</h2>
-
-      <p className="mx-auto mt-4 max-w-md text-gray-500">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque praesentium cumque iure
-        dicta incidunt est ipsam, officia dolor fugit natus?
-      </p>
-    </header>
-
-    <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <li>
-        <a href="#" className="group block overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            alt=""
-            className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-          />
-
-          <div className="relative bg-white pt-3">
-            <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-              Basic Tee
-            </h3>
-
-            <p className="mt-2">
-              <span className="sr-only"> Regular Price </span>
-
-              <span className="tracking-wider text-gray-900"> £24.00 GBP </span>
-            </p>
+    <nav
+        aria-label="Breadcrumb navigation"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 py-4"
+      >
+        <ol className="flex items-center gap-1 text-md text-gray-600">
+          <li>
+            <Link href="/" className="block transition hover:text-gray-700">
+              <span className="sr-only"> Home </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="size-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+            </Link>
+          </li>
+          <li className="rtl:rotate-180">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </li>
+          <li>
+            <Link href="/products" className="block transition hover:text-gray-700">
+              Products
+            </Link>
+          </li>
+          <li className="rtl:rotate-180">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </li>
+          <li>
+            <Link href={`/products/${params.categoryID}`} className="block transition hover:text-gray-700">
+              {params.categoryID}
+            </Link>
+          </li>
+          <li className="rtl:rotate-180">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </li>
+          <li>
+            <Link href={`/products/${params.categoryID}/${params.productID}`} className="block transition hover:text-gray-700 turncate ...">
+              {params.productID}
+            </Link>
+          </li>
+        </ol>
+      </nav>
+  <div className="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="relative group overflow-hidden rounded-lg shadow-lg">
+          <ProductImg/>
           </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="#" className="group block overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            alt=""
-            className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-          />
-
-          <div className="relative bg-white pt-3">
-            <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-              Basic Tee
-            </h3>
-
-            <p className="mt-2">
-              <span className="sr-only"> Regular Price </span>
-
-              <span className="tracking-wider text-gray-900"> £24.00 GBP </span>
-            </p>
+          <div className="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold mb-4">{params.productID}</h2>
+            <p className="text-gray-700 mb-6">Complete your purchase with Stripe's secure payment system.</p>
+            <button
+              onClick={handleCheckout}
+              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition"
+            >
+              Pay with Stripe
+            </button>
           </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="#" className="group block overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            alt=""
-            className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-          />
-
-          <div className="relative bg-white pt-3">
-            <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-              Basic Tee
-            </h3>
-
-            <p className="mt-2">
-              <span className="sr-only"> Regular Price </span>
-
-              <span className="tracking-wider text-gray-900"> £24.00 GBP </span>
-            </p>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="#" className="group block overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            alt=""
-            className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-          />
-
-          <div className="relative bg-white pt-3">
-            <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-              Basic Tee
-            </h3>
-
-            <p className="mt-2">
-              <span className="sr-only"> Regular Price </span>
-
-              <span className="tracking-wider text-gray-900"> £24.00 GBP </span>
-            </p>
-          </div>
-        </a>
-      </li>
-    </ul>
+        </div>
   </div>
 </section>
       <Footer />

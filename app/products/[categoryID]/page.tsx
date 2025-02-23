@@ -8,9 +8,9 @@ const page = ({ params }: { params: { categoryID: string; productID: string } })
   const products = Array.from({ length: 10 }, (_, index) => ({
     id: index,
     categoryID: params.categoryID,
-    productID: `${index}`,
+    productID: `Sample Product ${index}`,
     tag: params.categoryID,
-    name: `Sample Product ${index}`,
+    name: `Chicken${index}`,
     price: 120 + index * 10, // Example pricing
     image: 'https://th.bing.com/th/id/OIP.aG7qW3hdlk6cb1qmIuyNtgHaE9?rs=1&pid=ImgDetMain',
   }));
