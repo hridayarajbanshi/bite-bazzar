@@ -6,20 +6,31 @@ import Navbar from '@/components/Navbar'
 import Tabs from '@/components/Tabs'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
-import { loadStripe } from '@stripe/stripe-js';
+import { useState } from 'react';
+// import { loadStripe } from '@stripe/stripe-js';
 import ProductImg from '@/components/ProductImg';
 const page = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const params = useParams();
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-  const handleCheckout = async () => {
-    const stripe = await stripePromise;
-    const response = await fetch('/api/checkout', { method: 'POST' });
-    const session = await response.json();
-    if (stripe) {
-      stripe.redirectToCheckout({ sessionId: session.id });
-    }
-  };
+// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+//   const handleCheckout = async () => {
+//     const stripe = await stripePromise;
+//     const response = await fetch('/api/checkout', { method: 'POST' });
+//     const session = await response.json();
+//     if (stripe) {
+//       stripe.redirectToCheckout({ sessionId: session.id });
+//     }
+//   };
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const [num, setNum] = useState(1);
+const handleIncrement = () => {
+  setNum((prev) => prev + 1);
+};
+
+const handleDecrement = () => {
+  setNum((prev) => (prev > 1 ? prev - 1 : 1)); // Ensures quantity doesn't go below 1
+};
+
   return (
     <>
       <Navbar />
@@ -113,15 +124,26 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
           <div className="relative group overflow-hidden rounded-lg shadow-lg">
           <ProductImg/>
           </div>
-          <div className="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">{params.productID}</h2>
-            <p className="text-gray-700 mb-6">Complete your purchase with Stripe's secure payment system.</p>
-            <button
-              onClick={handleCheckout}
-              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition"
-            >
-              Pay with Stripe
-            </button>
+          <div className="flex flex-col p-6 bg-white rounded-lg shadow-lg">
+            <h2 className="text-3xl mb-6">{params.productID}</h2>
+            <span className='p-1 text-center text-sm bg-moonStone w-32 text-white font-semibold rounded-lg'>Discount 20%</span>
+            <p className="text-lg mt-4 mb-4">
+              Price: <b className='text-moonStone text-xl'>Rs.400</b>
+              </p>
+              <p className='text-lg '>Quantity: 
+              <button className='p-2  mx-2 bg-gray-600 text-white w-10' onClick={handleIncrement}>+</button>  <input type='number' className='bg-gray-200 p-2 max-w-screen-md' readOnly value={num}></input> <button className='mx-2 p-2  bg-gray-600 text-white w-10' onClick={handleDecrement}>-</button>
+              </p>
+              <form className="mt-4 flex gap-4">
+                      <button className="block w-full rounded-sm bg-gray-100 px-4 py-3 text-sm font-medium text-gray-900 transition hover:scale-105">
+                        Add to Cart
+                      </button>
+                      <button type="button" className="block w-full rounded-sm bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:scale-105">
+                        Buy Now
+                      </button>
+                    </form>
+
+              
+   
           </div>
         </div>
   </div>

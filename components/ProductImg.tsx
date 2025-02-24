@@ -19,7 +19,7 @@ const ProductImg = () => {
           className="object-contain w-full h-full transition-transform duration-300 hover:scale-110"
           alt={`Product ${index + 1}`}
         />
-        <div className="absolute top-4 right-4 z-10">
+        <div className="absolute top-4 left-4 z-10">
           {imgs.map((img, idx) => (
           <div
             key={img.id} // ✅ Added unique key
@@ -37,9 +37,9 @@ const ProductImg = () => {
         </div>
 
       </div>
-   <section className="p-4">
-    <h2 className="my-2 text-2xl font-bold ">Description</h2>
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum distinctio itaque facere iure quod voluptatibus modi quo eos earum, dignissimos aliquam illum maxime voluptatum. Labore iure tempore voluptas repellendus consectetur.</p>
+   <section className="p-4 border border-t-4 border-x-0 border-y-0 border-lightGreen">
+    <h2 className="my-1 text-2xl font-bold p-2 ">Description</h2>
+<p className="p-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum distinctio itaque facere iure quod voluptatibus modi quo eos earum, dignissimos aliquam illum maxime voluptatum. Labore iure tempore voluptas repellendus consectetur.</p>
 
    </section>
    
