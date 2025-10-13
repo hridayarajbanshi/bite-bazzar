@@ -17,18 +17,44 @@ const Register = () => {
     });
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
+    if (formData.password !== formData.confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+    try{
+        const res = await fetch('/api/register', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify({
+                name: formData.fullName,
+                email:formData.email,
+                phoneNumber: formData.phoneNumber,
+                password: formData.password,
+                password2: formData.confirmPassword
+            })
+       
+        });
+         if (res.ok){
+            const form = e.target as HTMLFormElement;
+            form.reset();
+         }else{
+            alert("Error registering user");
+         }
+    }catch(error){
+        console.log(error);
+        alert("Error registering user");
 
-        // In a real application, you would handle the API submission here
-        console.log("Registering user:", formData);
-        alert("Registration successful! (Check console for data)");
-    };
+    }
+
+    // In a real application, you would handle the API submission here
+    console.log("Registering user:", formData);
+    alert("Registration successful!");
+};
 
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
@@ -126,7 +152,7 @@ const Register = () => {
                             type="checkbox"
                             checked={showPassword}
                             onChange={() => setShowPassword(!showPassword)}
-                            className={`w-4 h-4 text-[${TECH_GREEN}] bg-gray-100 border-gray-300 rounded focus:ring-[${TECH_GREEN}] focus:ring-2`}
+                            className={`w-4 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-[${TECH_GREEN}] focus:ring-2`}
                             style={{ accentColor: TECH_GREEN }} // Use style for accent color consistency
                         />
                         <label 
