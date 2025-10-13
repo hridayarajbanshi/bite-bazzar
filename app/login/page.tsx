@@ -1,12 +1,9 @@
 "use client"
 import React from 'react'
 import { useState } from 'react'
-import Link from 'next/link'
+import {useRouter } from 'next/navigation'
 const page = () => {
    
-    const TECH_GREEN = '#60a785';
-    const HOVER_GREEN = '#4a8467'; 
-
     const [state, setState] = useState("login")
     const [formData, setFormData] = React.useState({
         name: '',
@@ -14,9 +11,10 @@ const page = () => {
         password: ''
     })
 
+    const router = useRouter();
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-        // In a real application, you would handle the API submission here
+        const res = await fetch()
         console.log("Submitting:", formData);
         console.log("Form State:", state);
         alert(`Form submitted for ${state}! Check the console.`);
