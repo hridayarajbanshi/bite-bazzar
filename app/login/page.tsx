@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import Link from 'next/link'
 import { useState } from 'react'
 import {useRouter } from 'next/navigation'
 const page = () => {
@@ -14,7 +15,7 @@ const page = () => {
     const router = useRouter();
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-        const res = await fetch()
+
         console.log("Submitting:", formData);
         console.log("Form State:", state);
         alert(`Form submitted for ${state}! Check the console.`);

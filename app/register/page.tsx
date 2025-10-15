@@ -19,41 +19,27 @@ const Register = () => {
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (formData.password !== formData.confirmPassword) {
-        alert("Passwords do not match!");
-        return;
+   try{
+    const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    
+    if (res.ok) {
+        const form = e.target as HTMLFormElement;
+        form.reset();
+        alert('Registration successful! Please log in.');
+    }else{
+        const data = await res.json();
+        alert(data.error || 'Registration failed. Please try again.');
+        console.log("Registration error:", data);
     }
-    try{
-        const res = await fetch('/api/register', {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            }, 
-            body: JSON.stringify({
-                name: formData.fullName,
-                email:formData.email,
-                phoneNumber: formData.phoneNumber,
-                password: formData.password,
-                password2: formData.confirmPassword
-            })
-       
-        });
-         if (res.ok){
-            const form = e.target as HTMLFormElement;
-            form.reset();
-         }else{
-            alert("Error registering user");
-         }
-    }catch(error){
-        console.log(error);
-        alert("Error registering user");
+   }catch(err){
 
-    }
-
-    // In a real application, you would handle the API submission here
-    console.log("Registering user:", formData);
-    alert("Registration successful!");
+   }
 };
 
     const handleChange = (e: { target: { name: any; value: any; }; }) => {

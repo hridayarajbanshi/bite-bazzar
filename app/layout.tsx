@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SessionProvider } from "next-auth/react";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,13 +21,13 @@ export const metadata: Metadata = {
   description: "Discover the latest in tech at Techcart. From cutting-edge gadgets to essential accessories, we have everything you need to stay connected and ahead of the curve.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
 
+  return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
