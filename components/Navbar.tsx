@@ -66,11 +66,11 @@ export default function Navbar() {
                 </div>
 
                 {/* Navigation Links */}
-                <a href="#" className="text-md text-gray-700 hover:text-[#60a785] transition font-medium">Home</a>
-                <a href="#" className="text-md text-gray-700 hover:text-[#60a785] transition font-medium">Shop</a>
+                <Link href={'/'} className="text-md text-gray-700 hover:text-[#60a785] transition font-medium">Home</Link>  
+                <Link href={'/shop'} className="text-md text-gray-700 hover:text-[#60a785] transition font-medium">Shop</Link>
                 
                 {/* Cart Icon */}
-                <CartIcon count={3} />
+               <Link href={'/cart'}>  <CartIcon count={3} /></Link>
 
                 {/* Login Button */}
                 <button className={`cursor-pointer px-8 py-2 ${techGreenClasses} transition text-white rounded-full font-medium`}>
@@ -78,13 +78,12 @@ export default function Navbar() {
                 </button>
             </div>
 
-            {/* Mobile Menu Button (Hamburger) */}
             <button 
                 onClick={() => setOpen(!open)} 
                 aria-label="Toggle Menu" 
-                className="sm:hidden z-10 p-1" // Added z-10 to keep it above mobile menu
+                className="sm:hidden z-10 p-1" 
             >
-                {/* Menu Icon SVG (using black fill) */}
+               
                 <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="21" height="1.5" rx=".75" fill="black" />
                     <rect x="8" y="6" width="13" height="1.5" rx=".75" fill="black" />

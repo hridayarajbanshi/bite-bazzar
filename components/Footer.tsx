@@ -142,18 +142,6 @@ const Footer = () => {
                 </div>
 
             </div>
-
-            {/* Copyright Section */}
-            <div className="border-t border-gray-200 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center text-sm font-normal">
-                    <p className="text-gray-500 mb-2 md:mb-0">
-                        Techcart ©2025. All rights reserved.
-                    </p>
-                    <p className="text-gray-500">
-                        Made with 💻 for the digital world.
-                    </p>
-                </div>
-            </div>
         </footer>
     );
 };
