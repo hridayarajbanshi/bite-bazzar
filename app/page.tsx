@@ -1,5 +1,6 @@
 
 import HeroSlider from "@/components/HeroSlider";
+import ProductCard from "@/components/ProductCard";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <>
 
 <HeroSlider/>
+<ProductCard/>
     </>
   );
 }
