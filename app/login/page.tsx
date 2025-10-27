@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
 import {useRouter } from 'next/navigation'
+import {ToastContainer, toast} from 'react-toastify'
 const page = () => {
    
     const [state, setState] = useState("login")
@@ -15,10 +16,31 @@ const page = () => {
     const router = useRouter();
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-
-        console.log("Submitting:", formData);
-        console.log("Form State:", state);
-        alert(`Form submitted for ${state}! Check the console.`);
+        try{
+            const res = await fetch('/api/auth/login',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            const data = await res.json();
+            if(!res.ok){
+                console.log(data.error);
+                return;
+            }
+             console.log("Login successful");
+            toast.success("Login Successful");
+            setTimeout(() => {
+                
+            router.push('/');
+            }, 2000);
+           
+            
+        }catch(err){
+            console.log("Login error:", err);
+            toast.error("Login Failed");
+        }
     }
 
     const handleChange = (e: { target: { name: any; value: any } }) => {
@@ -28,6 +50,7 @@ const page = () => {
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
+           <ToastContainer />
             <form onSubmit={handleSubmit} className="sm:w-[350px] w-full text-center border border-gray-300/60 rounded-2xl px-8 py-4 bg-white shadow-xl">
                 
                 {/* Title and Subtitle */}
