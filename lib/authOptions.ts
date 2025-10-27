@@ -19,8 +19,7 @@ export const authOptions: AuthOptions = {
 
         await connectToDB();
 
-        const user = await User.findOne({ email: credentials.email }).lean();
-
+        const user = await User.findOne({ email: credentials.email });
         if (!user) {
           throw new Error("Invalid email or password");
         }
@@ -34,41 +33,48 @@ export const authOptions: AuthOptions = {
           throw new Error("Invalid email or password");
         }
 
-        // ✅ Return safe user object (NextAuth will attach this to token)
-       return{
+        // ✅ Return minimal safe user object
+        return {
           id: user._id.toString(),
           name: user.name,
           email: user.email,
           phoneNumber: user.phoneNumber,
-          role: user.role,
+          role: user.role ?? "user",
         };
       },
     }),
   ],
 
-  // ✅ Use JWT strategy (required for credentials)
   session: { strategy: "jwt" },
 
-  // ✅ JWT and Session callbacks to persist custom fields (like role)
   callbacks: {
     async jwt({ token, user }) {
+     
       if (user) {
-        token.id = (user as any).id;
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
         token.role = (user as any).role;
+        token.phoneNumber = (user as any).phoneNumber;
       }
       return token;
     },
+
     async session({ session, token }) {
-      if (token) {
-        (session.user as any).id = token.id;
+      // ✅ Expose token fields to session.user
+      if (token && session.user) {
+        session.user.id = token.id as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
         (session.user as any).role = token.role;
+        (session.user as any).phoneNumber = token.phoneNumber;
       }
       return session;
     },
   },
 
   pages: {
-    signIn: "/login", // ✅ optional: custom login page
+    signIn: "/login", // ✅ custom login page (optional)
   },
 
   secret: process.env.NEXTAUTH_SECRET,

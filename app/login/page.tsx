@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
 import {useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import {ToastContainer, toast} from 'react-toastify'
 const page = () => {
    
@@ -17,25 +18,23 @@ const page = () => {
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
         try{
-            const res = await fetch('/api/auth/login',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            const data = await res.json();
-            if(!res.ok){
-                console.log(data.error);
+            const result = await signIn('credentials', {
+                email: formData.email,
+                password: formData.password,
+                redirect: false,
+            });
+
+            if (result?.error) {
+                console.log("Login error:", result.error);
+                toast.error("Invalid email or password");
                 return;
             }
-             console.log("Login successful");
+
+            console.log("Login successful");
             toast.success("Login Successful");
             setTimeout(() => {
-                
-            router.push('/');
+                router.push('/');
             }, 2000);
-           
             
         }catch(err){
             console.log("Login error:", err);

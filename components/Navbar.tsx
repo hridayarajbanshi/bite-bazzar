@@ -104,7 +104,7 @@ export default function Navbar() {
         {session?.user ? (
           <div className="flex items-center gap-3">
             <span className="text-gray-800 font-medium">
-              {session.user.name}
+              {session.user.name || session.user.email || 'User'}
             </span>
             <button
               onClick={() => signOut()}
@@ -147,7 +147,9 @@ export default function Navbar() {
 
           {session?.user ? (
             <div className="flex items-center justify-between w-full mt-4">
-              <span className="font-medium text-gray-800">{session.user.name}</span>
+              <span className="font-medium text-gray-800">
+                {session.user.name || session.user.email || 'User'}
+              </span>
               <button
                 onClick={() => signOut()}
                 className="p-2 rounded-full hover:bg-gray-100"
