@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary";
 
-export const runtime = "edge"; // 
-
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
