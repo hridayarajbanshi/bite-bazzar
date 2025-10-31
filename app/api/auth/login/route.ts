@@ -40,8 +40,9 @@ export async function POST(req: Request) {
       name: user.name,
       email: user.email,
       phoneNumber: user.phoneNumber,
+      role: user.role,
     };
-    console.log("✅ User logged in:", { id: user._id, email: user.email, name: user.name });
+    console.log("✅ User logged in:", { id: user._id, email: user.email, name: user.name, role: user.role });
     return new Response(JSON.stringify({ message: "Login successful", user: safeUser }), {
 
       status: 200,

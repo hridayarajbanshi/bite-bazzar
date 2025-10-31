@@ -1,4 +1,4 @@
-import mongoose, { Schema, models, model } from "mongoose";
+import { Schema, models, model } from "mongoose";
 
 const userSchema = new Schema(
   {
@@ -22,9 +22,16 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    }
   },
   { timestamps: true }
 );
+
+
 
 const User = models.User || model("User", userSchema);
 

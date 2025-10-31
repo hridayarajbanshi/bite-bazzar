@@ -39,7 +39,7 @@ export const authOptions: AuthOptions = {
           name: user.name,
           email: user.email,
           phoneNumber: user.phoneNumber,
-          role: user.role ?? "user",
+          role: user.role,
         };
       },
     }),
@@ -74,7 +74,7 @@ export const authOptions: AuthOptions = {
   },
 
   pages: {
-    signIn: "/login", // ✅ custom login page (optional)
+    signIn: "/login",
   },
 
   secret: process.env.NEXTAUTH_SECRET,
