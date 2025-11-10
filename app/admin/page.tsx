@@ -3,6 +3,8 @@ import { authOptions } from "@/lib/authOptions";
 import { redirect } from "next/navigation";
 import { connectToDB } from "@/lib/mongoDB";
 import Product from "@/models/product";
+import User from "@/models/user";
+import AdminSidebar from "@/components/AdminSideBar";
 
 export const revalidate = 0; 
 export default async function AdminPage() {
@@ -25,12 +27,20 @@ export default async function AdminPage() {
  
   await connectToDB();
   const totalProducts = await Product.countDocuments();
+  const totalUsers = await User.countDocuments();
 
   return (
-    <div className="p-8">
+<>
+   
+    <div className="grid grid-cols-2  flex-1">
+     
+ <AdminSidebar />
+
+      <div className="p-8">
       <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
       <div>Total products: {totalProducts}</div>
-      
+      <div>Total Users: {totalUsers}</div></div>
     </div>
+    </>
   );
 }
