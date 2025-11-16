@@ -14,7 +14,7 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-50 h-100 bg-white border-r border-gray-200 shadow-sm hidden md:flex flex-col">
+    <aside className="w-50 h-auto bg-white border-r border-gray-200 shadow-sm hidden md:flex flex-col">
       <nav className="flex-1 flex flex-col p-3 space-y-2">
         {menuItems.map((item) => (
           <Link
@@ -22,8 +22,8 @@ export default function AdminSidebar() {
             href={item.href}
             className={`flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               pathname === item.href
-                ? "bg-green-600 text-white"
-                : "text-gray-700 hover:bg-gray-100"
+                ? "bg-green-500 text-blue-50"
+                : "text-slate-700 hover:bg-gray-100"
             }`}
           >
             {item.icon}
