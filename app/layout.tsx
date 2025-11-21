@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import {Poppins} from 'next/font/google';
 import Footer from "@/components/Footer";
-
+import { ClerkProvider } from "@clerk/nextjs";
 
 const poppins = Poppins({
   weight: ['400', '700'],
@@ -21,6 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en" className={poppins.variable}>
       
       <body>
@@ -29,5 +30,6 @@ export default function RootLayout({
         <Footer/>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
