@@ -10,6 +10,7 @@ export const categoryType = defineType({
     defineField({
       name: 'title',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -17,10 +18,25 @@ export const categoryType = defineType({
       options: {
         source: 'title',
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'description',
-      type: 'text',
+      type: 'text',  
     }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    })
   ],
+  preview:{
+    select:{
+      title:'title',
+      subtitle:'description',
+      media:'image',
+    }
+  }
 })
