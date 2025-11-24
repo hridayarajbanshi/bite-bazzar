@@ -25,7 +25,19 @@ export const brandType = defineType({
             type: "slug",
             options: {
                 source: "title",
-            }
+            },
+            validation: (Rule) => Rule.required(),
         }),
-    ]
+        defineField({
+            name: "description",
+            title: "description",
+            type:"text"
+        }),
+    ], preview: { 
+        select:{
+            title: "title",
+            subtitle: "description",
+            media: "logo"
+        }
+    }
 })
