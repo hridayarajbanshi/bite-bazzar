@@ -22,7 +22,7 @@ export const categoryType = defineType({
     }),
     defineField({
       name: 'description',
-      type: 'text',  
+      type: 'string',  
     }),
     defineField({
       name: 'image',

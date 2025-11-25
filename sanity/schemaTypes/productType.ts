@@ -1,16 +1,16 @@
-import { TrolleyIcon } from "@sanity/icons";
-import { defineField, defineType } from "sanity";
-import { metadata } from '../../app/(client)/layout';
+import {TrolleyIcon} from "@sanity/icons";
+import {defineField, defineType} from "sanity";
+
 export const productType = defineType({
-    name: "products",
-    title: "products",
+    name: "product",
+    title: "Products",
     type: "document",
-    icon: "TrolleyIcon",
-    fields:[
+    icon: TrolleyIcon,
+    fields: [
         defineField({
             name: "name",
             title: "Product Name",
-            type: "String",
+            type: "string",
             validation:(Rule)=> Rule.required()
         }),
         defineField({
@@ -27,13 +27,14 @@ export const productType = defineType({
             name: "image",
             title: "Product Images",
             type: "array",
-            of: [{
-                type: "image",
-                options: {
-                    hotspot: true
+            of: [
+                {
+                    type: "image",
+                    options: {
+                        hotspot: true
+                    }
                 }
-            }],
-
+            ],
         }),
         defineField({
             name: "description",
@@ -73,33 +74,29 @@ export const productType = defineType({
             to: {type: "brand"}
         }),
         defineField({
-            name: "satus",
+            name: "status",
             title: "Product Status",
             type: "string",
             options:{
                 list: [
                     {title: "New", value: "new"},
-                    {title: "Hot", value: 
-                        "hot"
-                    },
-                    {title: "Sale", value: 
-                        "sale"
-                    },
+                    {title: "Hot", value: "hot"},
+                    {title: "Sale", value: "sale"},
                 ],
             },
         }),
         defineField({
-            name: "variant ",
+            name: "variant",
             title: "Product Type",
             type: "string",
             options: {
                 list: [
                     {title: "Laptops", value: "laptops"},
-                    {title: "smartphones", value: "Smartphones"},
-                    {title: "smartwatches", value: "Smartwatches"},
-                    {title: "airbuds", value: "Airbuds"},
-                    {title: "headphones", value: "Headphones"},
-                    {title: "camera", value: "Camera"},
+                    {title: "Smartphones", value: "smartphones"},
+                    {title: "Smartwatches", value: "smartwatches"},
+                    {title: "Airbuds", value: "airbuds"},
+                    {title: "Headphones", value: "headphones"},
+                    {title: "Camera", value: "camera"},
                 ]
             }
         }),
@@ -119,11 +116,10 @@ export const productType = defineType({
         },
         prepare(selection){
             const {title, subtitle, media} = selection;
-            const image = media && media[0];
             return {
                 title: title,
                 subtitle: `Rs.${subtitle}`,
-                media: image,
+                media: Array.isArray(media) ? media[0] : media,
             }
         }
     }

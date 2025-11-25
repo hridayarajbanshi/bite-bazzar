@@ -31,7 +31,7 @@ export const brandType = defineType({
         defineField({
             name: "description",
             title: "description",
-            type:"text"
+            type:"string"
         }),
     ], preview: { 
         select:{
