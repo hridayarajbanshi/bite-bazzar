@@ -1,11 +1,16 @@
 import React from 'react'
 import CompanySlider from '@/components/CompanySlider';
 import Features from '@/components/Features';
+import ProductGrid from '@/components/ProductGrid';
 export default function Home() {
   return (
    <>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10'>
+   <ProductGrid/>
+    </div>
    <CompanySlider />
    <Features />
+
    </>
   );
 }
