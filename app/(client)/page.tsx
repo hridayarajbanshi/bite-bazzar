@@ -1,7 +1,7 @@
 import React from 'react'
 import CompanySlider from '@/components/CompanySlider';
 import Features from '@/components/Features';
-import ProductGrid from '@/components/ProductGrid';
+import ProductGrid from '@/components/BrandGrid';
 export default function Home() {
   return (
    <>

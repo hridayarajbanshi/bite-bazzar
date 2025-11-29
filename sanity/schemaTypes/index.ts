@@ -1,5 +1,5 @@
 import {type SchemaTypeDefinition} from "sanity";
-import {categoryType} from "./categoryType";
+
 import {blockContentType} from "./blockContentType";
 import {productType} from "./productType";
 import {orderType} from "./orderType";
@@ -18,7 +18,6 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     orderType,
     authorType,
     blockContentType,
-    categoryType,
     addressType,
   ],
 };
