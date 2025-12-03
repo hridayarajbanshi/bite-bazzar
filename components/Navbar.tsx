@@ -7,7 +7,7 @@ const App = async () => {
     // Get user authentication state on the server
     const {userId } = auth();
     const user = await currentUser();
-
+    
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'Shop', path: '/shop' },

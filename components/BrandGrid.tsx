@@ -1,7 +1,9 @@
 "use client"
 import React from 'react'
-
+import Link from 'next/link';
 const BrandGrid = () => {
+
+
   const brands = [
     {
       id: 1,
@@ -48,13 +50,13 @@ const BrandGrid = () => {
       color: "from-orange-50 to-orange-100",
       textColor: "text-orange-800"
     }
-  ];
 
-  return (
+  ];
+  return ( 
     <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
       {/* Header */}
       <div className=" mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+        <h2 className="text-3xl font-bold text-gray-900 sm:text-3xl">
           Popular Brands
         </h2>
        
@@ -63,10 +65,15 @@ const BrandGrid = () => {
       {/* Brands Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {brands.map((brand) => (
-          <div
+          <li
             key={brand.id}
-            className={`group relative bg-${brand.logo}  rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform  hover:-translate-y-2 border border-gray-100 hover:cursor-pointer overflow-hidden`}
+            className={`group relative bg-${brand.logo}  rounded-full shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform  hover:-translate-y-2 border border-gray-100 hover:cursor-pointer overflow-hidden `}
           >
+            <Link href={{
+              pathname: '#',
+              query: { brand: brand.name }
+            }} className="block relative rounded-2xl overflow-hidden">
+              
             {/* Background Gradient */}
             <div className={`absolute inset-0 bg-gradient-to-br ${brand.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
             
@@ -76,9 +83,9 @@ const BrandGrid = () => {
             {/* Content */}
             <div className="relative z-10 p-6">
               {/* Logo */}
-              <div className="flex items-center justify-between mb-4">
-              </div>
+           
               {/* Brand Name */}
+            
               <h3 className={`text-xl font-bold mb-2 transition-colors text-center duration-300 group-hover:${brand.textColor}`}>
                 {brand.name}
               </h3>
@@ -89,7 +96,8 @@ const BrandGrid = () => {
             <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-padding opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10">
               <div className="absolute inset-[2px] rounded-2xl bg-white" />
             </div>
-          </div>
+            </Link>
+          </li>
         ))}
       </div>
     </div>

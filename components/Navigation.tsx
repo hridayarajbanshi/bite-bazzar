@@ -19,8 +19,7 @@ const Navigation: React.FC<NavigationProps> = ({
     navLinks, 
     initialCartCount, 
     initialFavoriteCount,
-    user,
-    userId 
+    user
 }) => {
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -126,9 +125,9 @@ const Navigation: React.FC<NavigationProps> = ({
                               
                             </div>
                         </SignedIn>
-                     {
-                        !user && <SignIn isScrolled={isScrolled}/>
-                     }
+                        {
+                            !user && <SignIn isScrolled={isScrolled} />
+                        }
                     </ClerkLoaded>
                 }
             </div>

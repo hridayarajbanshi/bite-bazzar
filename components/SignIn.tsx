@@ -1,5 +1,5 @@
 "use client"
-import { SignInButton } from '@clerk/nextjs'
+import { SignInButton, useUser } from '@clerk/nextjs'
 import React from 'react'
 
 interface SignInProps {
@@ -7,9 +7,16 @@ interface SignInProps {
 }
 
 const SignIn = ({ isScrolled }: SignInProps) => {
+  const { isSignedIn } = useUser()
+
+  // If user is already signed in, don't show the login button
+  if (isSignedIn) {
+    return null
+  }
+
   return (
     <SignInButton mode='modal'>
-      <button className={`px-8 py-2.5 rounded-full ml-4 transition-all duration-500 ${
+      <button className={`px-6 py-1.5 rounded-full ml-4 transition-all duration-500 ${
         isScrolled ? "text-white bg-black hover:bg-gray-800" : "bg-white text-black hover:bg-gray-100"
       }`}>
         Login 
