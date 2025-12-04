@@ -5,21 +5,25 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "typegen": "npx sanity@latest schema extract &&  npx sanity@latest typegen generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.35.3",
+    "@sanity/client": "^7.13.1",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.18.0",
-    "next": "16.0.3",
-    "next-sanity": "^11.6.8",
+    "framer-motion": "^12.23.25",
+    "next": "^16.0.7",
+    "next-sanity": "^11.6.10",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "sanity": "^4.18.0",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
+    "@sanity/cli": "^4.20.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
