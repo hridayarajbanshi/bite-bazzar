@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import ProductCard from './ProductCard';
 
 // Product data interface
 interface Product {
@@ -78,82 +79,6 @@ const StarRating = ({ rating }: { rating: number }) => {
   );
 };
 
-// Product card component
-const ProductCard = ({ product }: { product: Product }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
-    >
-      {/* Discount badge */}
-      {product.discount && (
-        <div className="absolute top-3 left-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-          -{product.discount}%
-        </div>
-      )}
-      
-      {/* New badge */}
-      {product.isNew && (
-        <div className="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-          NEW
-        </div>
-      )}
-
-      {/* Product image */}
-      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="w-full h-full flex items-center justify-center p-4">
-          <div className="w-40 h-40 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
-            <span className="text-4xl">
-              {product.type === 'laptops' && '💻'}
-              {product.type === 'headphones' && '🎧'}
-              {product.type === 'cameras' && '📷'}
-              {product.type === 'smartwatch' && '⌚'}
-              {product.type === 'smartphones' && '📱'}
-              {product.type === 'airbuds' && '🎵'}
-            </span>
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-colors duration-300" />
-      </div>
-
-      {/* Product info */}
-      <div className="p-5">
-        {/* Product type badge */}
-        <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-600 mb-2">
-          {product.type.charAt(0).toUpperCase() + product.type.slice(1)}
-        </span>
-        
-        {/* Product name */}
-        <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-1 group-hover:text-blue-600 transition-colors">
-          {product.name}
-        </h3>
-        
-        {/* Rating */}
-        <StarRating rating={product.rating} />
-        
-        {/* Price */}
-        <div className="mt-3 flex items-center gap-2">
-          <span className="text-2xl font-bold text-gray-900">
-            ${product.price.toLocaleString()}
-          </span>
-          {product.originalPrice && (
-            <span className="text-lg text-gray-500 line-through">
-              ${product.originalPrice.toLocaleString()}
-            </span>
-          )}
-        </div>
-
-        {/* Action button */}
-        <button className="mt-4 w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95">
-          Add to Cart
-        </button>
-      </div>
-    </motion.div>
-  );
-};
-
 // Main ProductGrid component
 const ProductGrid = () => {
   const [selectedType, setSelectedType] = useState<string>('all');
@@ -176,10 +101,11 @@ const ProductGrid = () => {
             {productTypes.map((type) => (
               <label
                 key={type.id}
-                className={`flex items-center gap-2 px-5 py-3 rounded-xl cursor-pointer transition-all duration-300 ${
+                className={`flex items-center gap-2 px-5 py-3 rounded-lg cursor-pointer transition-all duration-300 ${
                   selectedType === type.id
-                    ? 'bg-text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-text-white shadow-lg  border-2 text-green-600'
+            
+                    : 'bg-slate-700 text-white border-2 border-slate-300  hover:bg-text-white hover:shadow-md'
                 }`}
               >
                 <input
@@ -191,7 +117,7 @@ const ProductGrid = () => {
                     setSelectedType(e.target.value);
                     setVisibleProducts(6);
                   }}
-                  className="sr-only" // Hide the actual radio button
+                  className="sr-only" 
                 />
                 
                 <span className="">{type.label}</span>
@@ -199,38 +125,25 @@ const ProductGrid = () => {
             ))}
           </div>
         </div>
-
-        {/* Product count */}
-        <div className="mb-6">
-          <p className="text-gray-600">
-            Showing <span className="font-bold text-blue-600">{Math.min(visibleProducts, filteredProducts.length)}</span> of{' '}
-            <span className="font-bold text-gray-900">{filteredProducts.length}</span> products
-          </p>
-        </div>
-
+    
         {/* Product grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {filteredProducts.slice(0, visibleProducts).map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-8">
+          {
+            filteredProducts.slice(0, visibleProducts).map((product) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: product.id * 0.05 }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))
+          }
         </div>
-
-        {/* Load more button */}
-        {visibleProducts < filteredProducts.length && (
-          <div className="mt-12 text-center">
-            <button
-              onClick={loadMore}
-              className="px-8 py-3 bg-white border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 hover:border-blue-700 hover:text-blue-700 transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95"
-            >
-              Load More Products
-            </button>
-          </div>
-        )}
-
-        {/* Empty state */}
         {filteredProducts.length === 0 && (
           <div className="text-center py-16">
-            <div className="text-6xl mb-4">😕</div>
+          
             <h3 className="text-2xl font-bold text-gray-900 mb-2">No products found</h3>
             <p className="text-gray-600">Try selecting a different category</p>
           </div>
