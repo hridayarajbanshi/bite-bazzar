@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ProductCard from './ProductCard';
-
 // Product data interface
 interface Product {
   id: number;
@@ -16,7 +15,7 @@ interface Product {
   discount?: number;
 }
 
-// Sample product data
+
 const sampleProducts: Product[] = [
   // Laptops
   { id: 1, name: 'MacBook Pro 16"', type: 'laptops', price: 2399, originalPrice: 2599, image: '/api/placeholder/300/300', rating: 4.8, isNew: true },
@@ -49,7 +48,7 @@ const sampleProducts: Product[] = [
   { id: 18, name: 'Samsung Galaxy Buds2 Pro', type: 'airbuds', price: 229, image: '/api/placeholder/300/300', rating: 4.6, isNew: true },
 ];
 
-// Product type configuration
+
 const productTypes = [
   { id: 'all', label: 'All Products', icon: '📱' },
   { id: 'laptops', label: 'Laptops', icon: '💻' },
@@ -60,24 +59,7 @@ const productTypes = [
   { id: 'airbuds', label: 'Airbuds', icon: '🎵' },
 ];
 
-// Star rating component
-const StarRating = ({ rating }: { rating: number }) => {
-  return (
-    <div className="flex items-center gap-1">
-      {[...Array(5)].map((_, i) => (
-        <span
-          key={i}
-          className={`text-lg ${
-            i < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-300'
-          }`}
-        >
-          ★
-        </span>
-      ))}
-      <span className="ml-1 text-sm text-gray-600">({rating.toFixed(1)})</span>
-    </div>
-  );
-};
+
 
 // Main ProductGrid component
 const ProductGrid = () => {
@@ -89,13 +71,8 @@ const ProductGrid = () => {
     ? sampleProducts 
     : sampleProducts.filter(product => product.type === selectedType);
 
-  // Load more products
-  const loadMore = () => {
-    setVisibleProducts(prev => Math.min(prev + 6, filteredProducts.length));
-  };
-
   return (
-    <div className="px-2 py-4">
+    <div className=" mx-auto py-10">
       <div className="mx-auto">
           <div className="flex flex-wrap  gap-6 p-2">
             {productTypes.map((type) => (
@@ -127,7 +104,7 @@ const ProductGrid = () => {
         </div>
     
         {/* Product grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-8">
           {
             filteredProducts.slice(0, visibleProducts).map((product) => (
               <motion.div
@@ -136,7 +113,7 @@ const ProductGrid = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: product.id * 0.05 }}
               >
-                <ProductCard product={product} />
+                <ProductCard />
               </motion.div>
             ))
           }
